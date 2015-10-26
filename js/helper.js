@@ -84,8 +84,14 @@ function logClicks(x,y) {
   console.log('x location: ' + x + '; y location: ' + y);
 }
 
+
+//$(document).click() is a jQuery event handler on the page, which is a fancy way of saying that 
+//it will hold some code that runs every time a user clicks on the page.
+//The function (that doesn't have a name, making it an anonymous function) that gets passed into 
+//.click() will be run every time a user clicks on the page.
+// loc is a jQuery event object
 $(document).click(function(loc) {
-  // your code goes here!
+  logClicks(loc.pageX,loc.pageY);
 });
 
 
@@ -110,7 +116,7 @@ function initializeMap() {
   };
 
 
-  map = new google.maps.Map(document.querySelector('#map-div'), mapOptions);
+  map = new google.maps.Map(document.querySelector("#map-div"), mapOptions);
 
 
   /*
@@ -169,7 +175,7 @@ function initializeMap() {
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
-      // your code goes here!
+      infoWindow.open(map,marker);
     });
 
     // this is where the pin actually gets added to the map.
@@ -232,11 +238,11 @@ Uncomment the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-//window.addEventListener('resize', function(e) {
+window.addEventListener('resize', function(e) {
   //Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+ map.fitBounds(mapBounds);
+});
