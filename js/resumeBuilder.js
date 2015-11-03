@@ -15,20 +15,19 @@ var bio = {
 	"name" : "Darren Honeycutt",
 	"role" : "Developer",
 	"pictureURL" : "http://placehold.it/350x350",
-	"welcomeMessage" : "welcome to my page",
-	"skills" : ["root cause analysis", "corrective action"],
+	"welcomeMessage" : "welcome to my javascript resume",
+	"skills" : ["web development", "root cause analysis", "corrective action"],
 	"contacts": {
 		"mobile": "469 278 1143",
 		"email": "darren.j.honeycutt@gmail.com",
-		"github": "github username",
-		"twitter": "twitter username",
+		"github": "dhcutt",
 		"location": "Richardson TX"
 	}
 };
 
 $("#topContacts").append(HTMLmobile.replace("%data%",bio.contacts.mobile));
 $("#topContacts").append(HTMLemail.replace("%data%",bio.contacts.email));
-$("#topContacts").append(HTMLtwitter.replace("%data%",bio.contacts.twitter));
+//$("#topContacts").append(HTMLtwitter.replace("%data%",bio.contacts.twitter));
 $("#topContacts").append(HTMLgithub.replace("%data%",bio.contacts.github));
 $("#topContacts").append(HTMLlocation.replace("%data%",bio.contacts.location));
 $("#header").append(HTMLbioPic.replace("%data%",bio.pictureURL));
@@ -41,14 +40,16 @@ var work = {
 			"title": "Quality Control Analyst",
 			"location": "Lewisville, TX",
 			"dates": "2015",
-			"description": "End Customer Analyst"
+			"description": "End Customer Analyst",
+			"url": "https://www2.wwt.com/"
 		},
 		{
 			"employer": "Ceva Logistics",
 			"title": "Quality Control Analyst",
 			"location": "Lewisville, TX",
 			"dates": "2013 - 2015",
-			"description": "End Customer Analyst"
+			"description": "End Customer Analyst",
+			"url": "http://www.cevalogistics.com/"
 		}
 	]
 };
@@ -57,7 +58,8 @@ function displayWork() {
 for (job in work["jobs"]) {
 	$("#workExperience").append(HTMLworkStart);
 	
-	work["jobs"][job]["employer"] = HTMLworkEmployer.replace("%data%",work["jobs"][job]["employer"]);
+	jobName = HTMLworkEmployer.replace("%data%",work["jobs"][job]["employer"]);
+	work["jobs"][job]["employer"] = jobName.replace("#",work["jobs"][job]["url"]);
 	work["jobs"][job]["title"] = HTMLworkTitle.replace("%data%",work["jobs"][job]["title"]);
 	work["jobs"][job]["dates"] = HTMLworkDates.replace("%data%",work["jobs"][job]["dates"]);
 	work["jobs"][job]["location"] = HTMLworkLocation.replace("%data%",work["jobs"][job]["location"]);
@@ -108,14 +110,14 @@ var education = {
 			"location": "Lubbock",
 			"major": "Mechanical Engineering",
 			"dates attended": "insert dates",
-			"url": "insert schools website"
+			"url": "https://www.ttu.edu/"
 		},
 		{
 			"name": "Richland College",
 			"location": "Dallas",
 			"major": "Associates of Science",
 			"dates attended": "insert dates",
-			"url": "insert schools website"			
+			"url": "http://richlandcollege.edu/"			
 		}
 		],
 	"onlineCourses": [
@@ -123,13 +125,13 @@ var education = {
 			"title": "JavaScript Basics",
 			"school": "Udacity",
 			"dates": "2015",
-			"URL": "https://www.udacity.com/course/viewer#!/c-ud804/l-1930528550/e-1935058561/m-2948908664"
+			"URL": "https://www.udacity.com/course/javascript-basics--ud804"
 		},
 		{
 			"title": "Intro to HTML and CSS",
 			"school": "Udacity",
 			"dates": "2015",
-			"URL": "https://www.udacity.com/course/intro-to-html-and-css--ud304?utm_medium=referral&utm_campaign=api"
+			"URL": "https://www.udacity.com/course/intro-to-html-and-css--ud304"
 		}
 	]
 	};
@@ -137,6 +139,7 @@ education.display = function() {
 	for (edu in education.schools) {
 		$("#education").append(HTMLschoolStart);
 		eduName = HTMLschoolName.replace("%data%",education.schools[edu].name);
+		eduName = eduName.replace("#",education.schools[edu].url);
 		eduMajor = HTMLschoolMajor.replace("%data%",education.schools[edu].major);
 		eduDates = HTMLschoolDates.replace("%data%",education.schools[edu]["dates attended"]);
 		eduLocation = HTMLschoolLocation.replace("%data%",education.schools[edu].location);
@@ -146,9 +149,11 @@ education.display = function() {
 	for (online in education.onlineCourses) {
 		$("#education").append(HTMLschoolStart);
 		onTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[online].title);
+		onTitle = onTitle.replace("#",education.onlineCourses[online].URL);
 		onSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[online].school);
 		onDates = HTMLonlineDates.replace("%data%",education.onlineCourses[online].dates);
 		onURL = HTMLonlineURL.replace("%data%",education.onlineCourses[online].URL);
+		onURL = onURL.replace("#",education.onlineCourses[online].URL);
 		$(".education-entry:last").append(onTitle + onSchool + onDates + onURL);
 	}
 }
@@ -165,6 +170,8 @@ if (bio.skills !== 0) {
 	var formattedSkills = HTMLskills.replace("%data%",bio.skills[0]);
 	$("#skills").append(formattedSkills);
 	formattedSkills = HTMLskills.replace("%data%",bio.skills[1]);
+	$("#skills").append(formattedSkills);
+	formattedSkills = HTMLskills.replace("%data%",bio.skills[2]);
 	$("#skills").append(formattedSkills);
 };
 
